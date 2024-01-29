@@ -1,0 +1,27 @@
+﻿@page
+@using System.Data.SqlClient;
+
+@{
+    try
+    {
+        String id = Request.Query["Kode_MK"];
+
+        string connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=mycampus;Integrated Security=True;Encrypt=False";
+
+        using (SqlConnection con = new SqlConnection(connection))
+        {
+            con.Open();
+            string sql = "DELETE FROM matakuliah WHERE Kode_MK=@Kode_MK";
+            using (SqlCommand command = new SqlCommand(sql, con))
+            {
+                command.Parameters.AddWithValue("@Kode_MK", id);
+                command.ExecuteNonQuery();
+            }
+        }
+
+    }catch(Exception ex)
+    {
+     
+    }
+    Response.Redirect("/SubjectCampus");
+}

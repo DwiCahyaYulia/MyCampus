@@ -1,0 +1,48 @@
+﻿@page
+@model MyCampus.Pages.SubjectCampusModel
+@{
+}
+
+<br>
+<h2>Matakuliah</h2>
+<br>
+    <form method="get">
+        <input type="text" name="searchString" placeholder="Search subjects" />
+        <input type="submit" value="Search" />
+    </form>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>SKS</th>
+            <th>Action</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        @foreach(var item in Model.InfoSubjectList)
+        {
+            <tr>
+                <td>@item.Kode_MK</td>
+                <td>@item.Nama_MK</td>
+                <td>@item.Sks</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Edit?Kode_MK=@item.Kode_MK">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Delete?Kode_MK=@item.Kode_MK">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class='btn btn-primary btn-sm' href='/NewSubject'>New Subject</a>
+
+<div>
+    <br />
+    <strong>Page :</strong>
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        <a href="?pageNumber=@i">@i</a>
+    }
+</div>
